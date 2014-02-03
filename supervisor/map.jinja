@@ -1,0 +1,10 @@
+{% set supervisor = salt['grains.filter_by']({
+    'Debian': {
+    'pip': 'python-pip',
+    'package': 'supervisor',
+    },
+    'RedHat': {
+    'pip': 'python-pip',
+    'package': 'supervisor',
+    },
+}, merge=salt['pillar.get']('supervisor:lookup')) %}
