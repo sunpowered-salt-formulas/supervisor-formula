@@ -1,0 +1,15 @@
+{% set supervisor = pillar.get('supervisor', {}) -%}
+
+{% for process in supervisor.get('processes') %}
+
+[program:{{ process.name }}]
+command={{ process.get('command', None) }}
+directory={{ process.get('directory', '/tmp') }}
+user={{ process.get('user', 'root') }}
+autostart={{ process.get('autostart', 'True') }}
+autorestart={{ process.get('autorestart', 'True') }}
+redirect_stderr={{ process.get('redirect_stderr', 'True') }}
+stdout_logfile={{ process.get('stdout_logfile', '/var/log/supervisor/default.log') }}
+
+{% endfor %}
+
