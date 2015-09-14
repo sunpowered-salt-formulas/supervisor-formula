@@ -56,4 +56,4 @@ supervisor_service:
     - enable: True
     - reload: True
     - watch: 
-      - file: /etc/supervisor.conf
+      - file: /etc/supervisor/supervisor.conf
