@@ -1,13 +1,26 @@
-{% set supervisor = {
+{% set supervisor = salt['grains.filter_by']({
     'Debian': {
+        'pkg': 'supervisor',
+        'service': 'supervisor',
+        'daemon': '/usr/local/bin/supervisor',
+        'conf_file': '/etc/supervisor/supervisord.conf',
+        'confdir': '/etc',
+        'logdir': '/var/log/supervisor',
+        'rundir': '/var/run',
+        'include_confdir': '/etc/supervisor',
         'pip': 'python-pip',
-        'package': 'supervisor',
+        'package': 'supervisor'
     },
-    'CentOS': {
+    'RedHat': {
+        'pkg': 'supervisor',
+        'service': 'supervisor',
+        'daemon': '/usr/bin/supervisord',
+        'conf_file': '/etc/supervisord.conf',
+        'confdir': '/etc',
+        'logdir': '/var/log/supervisor',
+        'rundir': '/var/run',
+        'include_confdir': '/etc/supervisord.d',
         'pip': 'python-pip',
-        'package': 'supervisor',
+        'package': 'supervisor'
     },
-} %}
-
-{% set supervisor = salt['grains.filter_by'](supervisor,
-    merge=salt['pillar.get']('supervisor:lookup')) %}
+}, grain='os_family', merge=salt['pillar.get']('supervisor:lookup')) %}
