@@ -26,13 +26,23 @@ supervisor:
     - file_mode: 644
     - makedirs: True
 
-/etc/supervisor/processes.ini:
+/etc/supervisor/conf.d:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
+    - file_mode: 644
+    - makedirs: True
+
+/etc/supervisor/conf.d/{{ supervisor.get('name', 'processes') }}.conf:
   file.managed:
     - source: salt://supervisor/templates/processes.jinja
     - user: root
     - group: root
     - mode: 644
     - template: jinja
+    - context:
+      - process: process
 
 /etc/init/supervisor.conf:
   file.managed:

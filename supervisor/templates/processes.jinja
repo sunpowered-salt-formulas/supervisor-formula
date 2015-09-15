@@ -1,7 +1,9 @@
-{% set supervisor = pillar.get('supervisor', {}) -%}
+# ---------------------------------------------
+# This file managed by Salt - DO NOT EDIT
+# --------------------------------------------
+{% set supervisor=pillar.get('supervisor', {}) %}
 
-{% for process in supervisor.get('processes') %}
-
+{% for process in supervisor.processes %}
 [program:{{ process.name }}]
 command={{ process.get('command', None) }}
 directory={{ process.get('directory', '/tmp') }}
@@ -13,4 +15,5 @@ redirect_stderr={{ process.get('redirect_stderr', 'True') }}
 stdout_logfile={{ process.get('stdout_logfile', '/var/log/supervisor/default.log') }}
 
 {% endfor %}
+
 
