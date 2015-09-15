@@ -41,8 +41,6 @@ supervisor:
     - group: root
     - mode: 644
     - template: jinja
-    - context:
-      - process: process
 
 /etc/init/supervisor.conf:
   file.managed:
