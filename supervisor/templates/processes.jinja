@@ -11,6 +11,7 @@ user={{ process.get('user', 'root') }}
 startsecs={{ process.get('startsecs', '1') }}
 autostart={{ process.get('autostart', 'True') }}
 autorestart={{ process.get('autorestart', 'True') }}
+environment={{ process.get('environment', '') }}
 redirect_stderr={{ process.get('redirect_stderr', 'True') }}
 stdout_logfile={{ process.get('stdout_logfile', '/var/log/supervisor/default.log') }}
 
