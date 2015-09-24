@@ -2,7 +2,6 @@
 # This file managed by Salt - DO NOT EDIT
 # --------------------------------------------
 {% set supervisor=pillar.get('supervisor', {}) %}
-
 {% for process in supervisor.processes %}
 [program:{{ process.name }}]
 command={{ process.get('command', None) }}
@@ -11,10 +10,9 @@ user={{ process.get('user', 'root') }}
 startsecs={{ process.get('startsecs', '1') }}
 autostart={{ process.get('autostart', 'True') }}
 autorestart={{ process.get('autorestart', 'True') }}
-environment={{ process.get('environment', '') }}
 redirect_stderr={{ process.get('redirect_stderr', 'True') }}
 stdout_logfile={{ process.get('stdout_logfile', '/var/log/supervisor/default.log') }}
-
+{% if process.get('environment') %}environment={{ process.get('environment', '') }}{% endif %}
 {% endfor %}
 
 
