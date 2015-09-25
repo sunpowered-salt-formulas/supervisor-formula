@@ -25,6 +25,8 @@ run_service:
     - group: root
     - mode: 644
     - template: jinja
+    - watch_in:
+      - service: run_service
 
 {#/etc/init/supervisor.conf:#}
 {#  file.managed:#}
