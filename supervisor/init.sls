@@ -4,7 +4,7 @@ install_supervisor:
   pkg.installed:
     - name: {{ supervisor.package }}
 
-run_service:
+supervisor_service:
   service.running:
     - name: supervisor
     - require:
